@@ -44,6 +44,27 @@ public class AccountServiceImpl implements AccountService {
         return ResponseEntity.ok(account);
     }
 
+    @Override
+    public Account updateAccountById( Integer userId, Account account) {
+        Account newInfoAcc = accountsMap.get(userId);
+        if(userId == null){
+            throw new ResponseStatusException(NOT_FOUND);
+        }
+        newInfoAcc.setFirstName(account.getFirstName());
+        newInfoAcc.setLastName(account.getLastName());
+        newInfoAcc.setCountry(account.getCountry());
+        newInfoAcc.setCity(account.getCity());
+        newInfoAcc.setEmail(account.getEmail());
+
+        return newInfoAcc;
+    }
+
+    @Override
+    public void deleteAccountByUserId(Integer userId) {
+        accountsMap.remove(userId);
+
+    }
+
 /*
     @Override
     public Account findAccountById(Integer userId) {
@@ -56,26 +77,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
  */
-
-
-    @Override
-    public Account updateAccountDataById( Long userId) {
-        Account account = accountsMap.get(userId);
-        if(userId == null){
-            throw new ResponseStatusException(NOT_FOUND);
-        }
-        account.setFirstName(account.getFirstName());
-
-        return null;
-    }
-
-    @Override
-    public void deleteAccountByUserId(Long userId) {
-        accountsMap.remove(userId);
-
-    }
-
-
 
 
 }

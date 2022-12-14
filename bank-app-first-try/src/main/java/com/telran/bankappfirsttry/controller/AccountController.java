@@ -32,13 +32,16 @@ public class AccountController {
     }
 
 
-
     @GetMapping("/accounts/{userId}")
     public ResponseEntity<Account> findAccountById(@PathVariable("userId") Integer userId) {
       return  accountService.findAccountById(userId);
     }
 
-
+    @PatchMapping("/accounts/{userId}")
+    public Account updateAccountById(@PathVariable("userId") Integer userId,
+                                     @RequestBody Account account){
+        return accountService.updateAccountById(userId, account);
+    }
 /*
 
     @GetMapping("/accounts/{userId}")

@@ -7,15 +7,16 @@ import java.util.List;
 
 public interface AccountService {
     void createAccount(Account account);
-  //  ResponseEntity<Account> findAccountById(Long userId);
-
-    ResponseEntity<Account> findAccountById(Integer userId);
-  //  Account findAccountById(Integer userId);
     List<Account>findAllAccounts();
-    Account updateAccountDataById(Long userId);
-    void deleteAccountByUserId(Long userId);
+    ResponseEntity<Account> findAccountById(Integer userId);
+    Account updateAccountById(Integer userId, Account account);
+    void deleteAccountByUserId(Integer userId);
 
 
+
+
+//  Account findAccountById(Integer userId);
+//  ResponseEntity<Account> findAccountById(Long userId);
 
 
 

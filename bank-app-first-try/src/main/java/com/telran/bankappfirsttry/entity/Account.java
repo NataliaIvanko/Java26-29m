@@ -14,15 +14,15 @@ import java.util.UUID;
 public class Account {
 
     private Integer userId;
-   // private Long UserTypeId;
     private String firstName;
     private String lastName;
     private String country;
     private String city;
+    private String email;
     private LocalDateTime creationDate;
-    List<Long> transactions;
+    private List<Long> transactions;
 
    // private String userLogin;
   //  private String userPassword;
-
+// private Long UserTypeId;
 }
