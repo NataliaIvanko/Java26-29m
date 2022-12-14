@@ -27,8 +27,8 @@ public class AccountController {
     }
 
     @GetMapping("/accounts")
-    public List<Account> findAllAccounts(){
-        return accountService.findAllAccounts();
+    public List<Account> findAllAccounts(@RequestParam (value = "city", required = false) String city){
+        return accountService.getAccountsFiltered(city);
     }
 
 
@@ -42,6 +42,16 @@ public class AccountController {
                                      @RequestBody Account account){
         return accountService.updateAccountById(userId, account);
     }
+/*
+    @GetMapping("/accounts")
+    public List<Account> getAccountsByFilters(@RequestParam (value = "city") String city){
+        return accountService.getAccountsByFilters(city);
+    }
+
+ */
+
+//use "parameters as a part of a path" for mandatory parameters
+//use "parameters as a query string" for optional parameters.
 /*
 
     @GetMapping("/accounts/{userId}")

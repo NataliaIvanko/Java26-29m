@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -31,8 +30,13 @@ public class AccountServiceImpl implements AccountService {
 
     }
    @Override
-    public List<Account> findAllAccounts() {
+    public List<Account> getAccountsFiltered(String city) {
+      if(city==null){
         return accountsMap.values().stream().toList();
+      }
+       return accountsMap.values().stream()
+               .filter(acc-> acc.getCity().equalsIgnoreCase(city))
+               .toList();
     }
 
     public ResponseEntity<Account> findAccountById(Integer userId) {
@@ -57,8 +61,24 @@ public class AccountServiceImpl implements AccountService {
         newInfoAcc.setEmail(account.getEmail());
 
         return newInfoAcc;
+
+    }/*
+    @Override
+    public List<Account> getAccountsByFilters(String city) {
+        return accountsMap.values().stream()
+                .filter(acc-> acc.getCity().equalsIgnoreCase(city))
+                .toList();
+    }
+/*
+    @Override
+    public Collection<Account> getAccountsByFilters(String city) {
+        Collection<Account> filteredAccounts = accountsMap.entrySet().stream()
+                .filter(account -> account.getValue().getCity().equalsIgnoreCase(city))
+                .map(account-> )
+                .collect(Collectors.toCollection(ArrayList::new))
     }
 
+ */
     @Override
     public void deleteAccountByUserId(Integer userId) {
         accountsMap.remove(userId);

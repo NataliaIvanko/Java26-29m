@@ -20,6 +20,7 @@ public class Account {
     private String city;
     private String email;
     private LocalDateTime creationDate;
+  //  @ManyToMany
     private List<Long> transactions;
 
    // private String userLogin;
