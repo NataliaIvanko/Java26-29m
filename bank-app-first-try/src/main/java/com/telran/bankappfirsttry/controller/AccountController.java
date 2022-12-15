@@ -38,7 +38,7 @@ public class AccountController {
 
     @GetMapping("/accounts/{userId}")
     public ResponseEntity<Account> findAccountById(@PathVariable("userId") Integer userId) {
-      return  accountService.findAccountById(userId);
+      return  accountService.getAccountById(userId);
     }
 
     @PatchMapping("/accounts/{userId}")

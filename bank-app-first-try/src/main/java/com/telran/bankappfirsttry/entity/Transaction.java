@@ -1,6 +1,8 @@
 package com.telran.bankappfirsttry.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.time.LocalDateTime;
 @AllArgsConstructor
@@ -8,12 +10,20 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@Builder
+
+@Entity
+@Table(name = "transaction")
 public class Transaction {
+
+    @Id //primary key. Чтобы создать таблицу в бд с уникальным полем, досаточно аннотации
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dateTime;
     private String type;
     private Float amount;
     private Float accountFrom;
     private Float accountTo;
+
+
+
 }
