@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,8 +30,9 @@ public class AccountController {
     }
 
     @GetMapping("/accounts")
-    public List<Account> findAllAccounts(@RequestParam (value = "city", required = false) String city){
-        return accountService.getAccountsFiltered(city);
+    public List<Account> getAccountsFiltered(@RequestParam (value = "city", required = false) String city,
+                                            @RequestParam(value = "date", required = false) LocalDateTime date){
+        return accountService.getAccountsFiltered(city, date);
     }
 
 
@@ -42,6 +46,10 @@ public class AccountController {
                                      @RequestBody Account account){
         return accountService.updateAccountById(userId, account);
     }
+
+
+
+
 /*
     @GetMapping("/accounts")
     public List<Account> getAccountsByFilters(@RequestParam (value = "city") String city){

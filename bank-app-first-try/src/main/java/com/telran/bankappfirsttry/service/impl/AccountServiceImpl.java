@@ -30,14 +30,65 @@ public class AccountServiceImpl implements AccountService {
 
     }
    @Override
-    public List<Account> getAccountsFiltered(String city) {
-      if(city==null){
-        return accountsMap.values().stream().toList();
-      }
+    public List<Account> getAccountsFiltered(String city, LocalDateTime creationDate) {//date, city, country, sorted by date asc, desc
+       if (city != null) {
+           if (creationDate == null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCity().equalsIgnoreCase(city))
+                       .toList();
+           }
+       }
+       if (city == null) {
+           if (creationDate != null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCreationDate().equals(creationDate))
+                       .toList();
+           }
+       }
+       if (city != null) {
+           if (creationDate != null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCity().equalsIgnoreCase(city)
+                               && (acc.getCreationDate().equals(creationDate)))
+                       .toList();
+           }
+
+       }
        return accountsMap.values().stream()
-               .filter(acc-> acc.getCity().equalsIgnoreCase(city))
+               .sorted(Comparator.comparing(Account::getUserId))
                .toList();
-    }
+   }
+
+
+
+       /*
+       if (city == null && date == null) {
+           return accountsMap.values().stream()
+                   .sorted(Comparator.comparing(Account::getUserId))
+                   .toList();
+       }
+       if (city != null && date == null) {
+           return accountsMap.values().stream()
+                   .filter(acc -> acc.getCity().equalsIgnoreCase(city))
+                   .toList();
+       }
+       if (city != null) {
+           return accountsMap.values().stream()
+
+                   .filter(acc -> acc.getCity().equalsIgnoreCase(city)
+                           && (acc.getCreationDate().equals(date)))
+                   .toList();
+
+       }
+       //if date !=0 & sort != 0
+            //if sort = -creation date
+                // else
+       return accountsMap.values().stream()
+               .sorted(Comparator.comparing(acc-> acc.getCreationDate(), Comparator.reverseOrder()))
+               .toList();
+
+        */
+
 
     public ResponseEntity<Account> findAccountById(Integer userId) {
         Account account = accountsMap.get(userId);
