@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AccountService {
     void createAccount(Account account);
-    List<Account> getAccountsFiltered(String city, LocalDateTime date);
+    List<Account> getAccountsFiltered(List<String> city, LocalDateTime creationDate, String sort);
     ResponseEntity<Account> getAccountById(Integer userId);
     Account updateAccountById(Integer userId, Account account);
  //   List<Account> getAccountsByFilters(String city);

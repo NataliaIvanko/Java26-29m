@@ -29,10 +29,11 @@ public class AccountController {
 
     }
 
-    @GetMapping("/accounts")
-    public List<Account> getAccountsFiltered(@RequestParam (value = "city", required = false) String city,
-                                            @RequestParam(value = "date", required = false) LocalDateTime date){
-        return accountService.getAccountsFiltered(city, date);
+    @GetMapping("/accounts")   //creationDate
+    public List<Account> getAccountsFiltered(@RequestParam (value = "city", required = false) List<String>city,
+                                             @RequestParam(value = "date", required = false) LocalDateTime date,
+                                             @RequestParam(value= "sort", required = false) String sort){
+        return accountService.getAccountsFiltered(city, date, sort);
     }
 
 

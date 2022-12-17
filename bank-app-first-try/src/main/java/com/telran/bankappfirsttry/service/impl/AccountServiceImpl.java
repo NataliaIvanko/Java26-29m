@@ -20,6 +20,11 @@ public class AccountServiceImpl implements AccountService {
    private final static AtomicInteger userId = new AtomicInteger();
     private final Map<Integer, Account> accountsMap = new HashMap<Integer, Account>();
 
+    List<String>cities = accountsMap.values().stream()
+            .map(Account::getCity)
+            .collect(Collectors.toList());
+
+
 
     @Override
     public void createAccount(Account account) {
@@ -30,14 +35,21 @@ public class AccountServiceImpl implements AccountService {
 
     }
    @Override
-    public List<Account> getAccountsFiltered(String city, LocalDateTime creationDate) {//date, city, country, sorted by date asc, desc
+    public List<Account> getAccountsFiltered(List<String> city, LocalDateTime creationDate, String sort) {//date, city, country, sorted by date asc, desc
+
        if (city != null) {
+           System.out.println(city);
            if (creationDate == null) {
+               System.out.println(creationDate);
                return accountsMap.values().stream()
-                       .filter(acc -> acc.getCity().equalsIgnoreCase(city))
+                       .filter(acc -> city.contains(acc.getCity()))
+                               //acc.getCity().equalsIgnoreCase(city.get(0)))
+                    //   .sorted(Comparator.comparing(Account::getCreationDate))
                        .toList();
            }
        }
+
+
        if (city == null) {
            if (creationDate != null) {
                return accountsMap.values().stream()
@@ -48,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
        if (city != null) {
            if (creationDate != null) {
                return accountsMap.values().stream()
-                       .filter(acc -> acc.getCity().equalsIgnoreCase(city)
+                       .filter(acc -> acc.getCity().equalsIgnoreCase(city.toString())
                                && (acc.getCreationDate().equals(creationDate)))
                        .toList();
            }
@@ -58,6 +70,39 @@ public class AccountServiceImpl implements AccountService {
                .sorted(Comparator.comparing(Account::getUserId))
                .toList();
    }
+
+        /*
+       if (city != null) {
+           if (date == null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCity().equalsIgnoreCase(city.toString()))
+                      // .sorted(Comparator.comparing(Account::getCreationDate))
+                       .toList();
+           }
+       }
+
+       if (city == null) {
+           if (date != null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCreationDate().equals(date))
+                       .toList();
+           }
+       }
+       if (city != null) {
+           if (date != null) {
+               return accountsMap.values().stream()
+                       .filter(acc -> acc.getCity().equalsIgnoreCase(city.toString())
+                               && (acc.getCreationDate().equals(date)))
+                       .toList();
+           }
+
+       }
+       return accountsMap.values().stream()
+               .sorted(Comparator.comparing(Account::getUserId))
+               .toList();
+   }
+
+ */
 
 
 
