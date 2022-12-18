@@ -12,7 +12,7 @@ public interface AccountService {
     List<Account> getAccountsFiltered(List<String> city, LocalDateTime creationDate, String sort);
     ResponseEntity<Account> getAccountById(Integer userId);
     Account updateAccountById(Integer userId, Account account);
-    Transaction transferMoneyBetweenAccounts(Integer idTo, Integer idFrom, Float amount, Account account);
+    void transferMoneyBetweenAccounts(Integer idTo, Integer idFrom, Float amount, Account account, Transaction transaction);
  //   List<Account> getAccountsByFilters(String city);
     void deleteAccountByUserId(Integer userId);
 

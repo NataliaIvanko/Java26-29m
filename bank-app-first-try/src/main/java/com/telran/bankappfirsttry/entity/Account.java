@@ -1,5 +1,6 @@
 package com.telran.bankappfirsttry.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -11,9 +12,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Builder
+/*
+@Entity
+@Table(name = "account")
 
+ */
 public class Account {
+/*
+    @Id //primary key. Чтобы создать таблицу в бд с уникальным полем, досаточно аннотации
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+ */
     private Integer userId;
     private String firstName;
     private String lastName;

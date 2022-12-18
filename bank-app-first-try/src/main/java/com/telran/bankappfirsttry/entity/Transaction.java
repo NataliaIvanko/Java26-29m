@@ -19,7 +19,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dateTime;
-    private String type;
+    private TransactionType type;
     private Float amount;
     private Integer accountFrom;
     private Integer accountTo;

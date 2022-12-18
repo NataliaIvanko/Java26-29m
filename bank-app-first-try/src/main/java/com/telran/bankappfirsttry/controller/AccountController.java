@@ -54,12 +54,12 @@ public class AccountController {
     }
 //accounts?from=<fromId>&to=<toId>&amount=<moneyAmount>:
     @PutMapping("/accounts")
-    public Transaction transferMoneyBetweenAccounts(@RequestParam(value = "fromId", required = true ) Integer fromId,
-                                             @RequestParam(value = "toId", required = true) Integer toId,
+    public void transferMoneyBetweenAccounts(@RequestParam(value = "idFrom", required = true ) Integer idFrom,
+                                             @RequestParam(value = "idTo", required = true) Integer idTo,
                                              @RequestParam(value = "amount", required = true) Float amount,
                                              @RequestBody Account account,
-                                                @RequestBody Transaction transaction){
-        return accountService.transferMoneyBetweenAccounts(fromId, toId, amount, account);
+                                             @RequestBody Transaction transaction){
+        accountService.transferMoneyBetweenAccounts(idFrom, idTo, amount, account, transaction);
 
     }
 
