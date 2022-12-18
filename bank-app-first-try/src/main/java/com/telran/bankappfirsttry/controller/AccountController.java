@@ -1,7 +1,9 @@
 package com.telran.bankappfirsttry.controller;
 
 import com.telran.bankappfirsttry.entity.Account;
+import com.telran.bankappfirsttry.entity.Transaction;
 import com.telran.bankappfirsttry.service.AccountService;
+import com.telran.bankappfirsttry.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +20,12 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+
+
     public AccountController(AccountService accountService){
         this.accountService = accountService;
     }
+
 
     @PostMapping("/accounts")
     public void createAccount(@RequestBody Account account){
@@ -46,6 +51,16 @@ public class AccountController {
     public Account updateAccountById(@PathVariable("userId") Integer userId,
                                      @RequestBody Account account){
         return accountService.updateAccountById(userId, account);
+    }
+//accounts?from=<fromId>&to=<toId>&amount=<moneyAmount>:
+    @PutMapping("/accounts")
+    public Transaction transferMoneyBetweenAccounts(@RequestParam(value = "fromId", required = true ) Integer fromId,
+                                             @RequestParam(value = "toId", required = true) Integer toId,
+                                             @RequestParam(value = "amount", required = true) Float amount,
+                                             @RequestBody Account account,
+                                                @RequestBody Transaction transaction){
+        return accountService.transferMoneyBetweenAccounts(fromId, toId, amount, account);
+
     }
 
 

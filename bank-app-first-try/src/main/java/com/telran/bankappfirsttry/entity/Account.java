@@ -21,8 +21,13 @@ public class Account {
     private String city;
     private String email;
     private LocalDateTime creationDate;
+    private Float balance;
   //  @ManyToMany
     private List<Long> transactions;
+
+    public void addTransactionToList(Long id){
+        this.transactions.add(id);
+    }
 
    // private String userLogin;
   //  private String userPassword;

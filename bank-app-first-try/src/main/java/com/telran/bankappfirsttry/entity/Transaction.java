@@ -21,8 +21,8 @@ public class Transaction {
     private LocalDateTime dateTime;
     private String type;
     private Float amount;
-    private Float accountFrom;
-    private Float accountTo;
+    private Integer accountFrom;
+    private Integer accountTo;
 
 
 
