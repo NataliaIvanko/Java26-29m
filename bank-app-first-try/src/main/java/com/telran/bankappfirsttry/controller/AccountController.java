@@ -31,57 +31,37 @@ public class AccountController {
     public void createAccount(@RequestBody Account account){
         accountService.createAccount(account);
 
-
-    }
-
-    @GetMapping("/accounts")   //creationDate
-    public List<Account> getAccountsFiltered(@RequestParam (value = "city", required = false) List<String>city,
-                                             @RequestParam(value = "date", required = false) LocalDateTime date,
-                                             @RequestParam(value= "sort", required = false) String sort){
-        return accountService.getAccountsFiltered(city, date, sort);
     }
 
 
     @GetMapping("/accounts/{userId}")
     public ResponseEntity<Account> findAccountById(@PathVariable("userId") Integer userId) {
-      return  accountService.getAccountById(userId);
+        return  accountService.getAccountById(userId);
+    }
+    @GetMapping("/accounts")   //creationDate
+    public List<Account> getAccountsFiltered(@RequestParam (value = "city", required = false) List<String>city,
+                                             @RequestParam(value = "date", required = false) LocalDateTime creationDate,
+                                             @RequestParam(value= "sort", required = false) String sort){
+        return accountService.getAccountsFiltered(city, creationDate, sort);
     }
 
     @PatchMapping("/accounts/{userId}")
     public Account updateAccountById(@PathVariable("userId") Integer userId,
+                                     @RequestParam(value = "amount", required = false) Float amount,
                                      @RequestBody Account account){
-        return accountService.updateAccountById(userId, account);
+        return accountService.updateAccountById(userId, account, amount);
     }
+
+
 //accounts?from=<fromId>&to=<toId>&amount=<moneyAmount>:
     @PutMapping("/accounts")
     public void transferMoneyBetweenAccounts(@RequestParam(value = "idFrom", required = true ) Integer idFrom,
                                              @RequestParam(value = "idTo", required = true) Integer idTo,
                                              @RequestParam(value = "amount", required = true) Float amount,
-                                             @RequestBody Account account,
-                                             @RequestBody Transaction transaction){
-        accountService.transferMoneyBetweenAccounts(idFrom, idTo, amount, account, transaction);
+                                             @RequestBody Account account){
+        accountService.transferMoneyBetweenAccounts(idFrom, idTo, amount, account);
 
     }
 
 
-
-
-/*
-    @GetMapping("/accounts")
-    public List<Account> getAccountsByFilters(@RequestParam (value = "city") String city){
-        return accountService.getAccountsByFilters(city);
-    }
-
- */
-
-//use "parameters as a part of a path" for mandatory parameters
-//use "parameters as a query string" for optional parameters.
-/*
-
-    @GetMapping("/accounts/{userId}")
-    public Account findAccountById(@PathVariable("userId") Integer userId) {
-        return  accountService.findAccountById(userId);
-    }
-
- */
 }

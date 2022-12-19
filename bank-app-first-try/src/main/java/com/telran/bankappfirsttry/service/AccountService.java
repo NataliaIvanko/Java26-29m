@@ -11,8 +11,10 @@ public interface AccountService {
     void createAccount(Account account);
     List<Account> getAccountsFiltered(List<String> city, LocalDateTime creationDate, String sort);
     ResponseEntity<Account> getAccountById(Integer userId);
-    Account updateAccountById(Integer userId, Account account);
-    void transferMoneyBetweenAccounts(Integer idTo, Integer idFrom, Float amount, Account account, Transaction transaction);
+    Account updateAccountById(Integer userId, Account account, Float amount);
+  //  Account updateAccountByAmount(Integer id, Float amount);
+    void transferMoneyBetweenAccounts(Integer idTo, Integer idFrom, Float amount, Account account);
+
  //   List<Account> getAccountsByFilters(String city);
     void deleteAccountByUserId(Integer userId);
 
