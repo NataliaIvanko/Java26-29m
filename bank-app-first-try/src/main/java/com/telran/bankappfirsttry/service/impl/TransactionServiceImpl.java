@@ -1,7 +1,9 @@
 package com.telran.bankappfirsttry.service.impl;
 
 import com.telran.bankappfirsttry.entity.Transaction;
+import com.telran.bankappfirsttry.repository.TransactionRepository;
 import com.telran.bankappfirsttry.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,9 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
+
+@Autowired
+private TransactionRepository transactionRepository;
 
     private final List<Transaction> transactionsList = new ArrayList<>();
     @Override
