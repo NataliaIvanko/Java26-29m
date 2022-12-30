@@ -10,19 +10,20 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
-/*
+
 @Entity
 @Table(name = "account")
 
- */
+
 public class Account {
-/*
+
     @Id //primary key. Чтобы создать таблицу в бд с уникальным полем, досаточно аннотации
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
- */
+
     private Integer userId;
     private String firstName;
     private String lastName;
