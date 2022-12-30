@@ -3,8 +3,11 @@ package com.telran.bankappfirsttry.service.impl;
 import com.telran.bankappfirsttry.entity.Account;
 import com.telran.bankappfirsttry.entity.Transaction;
 import com.telran.bankappfirsttry.entity.TransactionType;
+import com.telran.bankappfirsttry.repository.AccountRepository;
+import com.telran.bankappfirsttry.repository.TransactionRepository;
 import com.telran.bankappfirsttry.service.AccountService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +22,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
+
     private final static AtomicInteger userId = new AtomicInteger();
     private final Map<Integer, Account> accountsMap = new HashMap<Integer, Account>();
 
@@ -183,8 +192,8 @@ public class AccountServiceImpl implements AccountService {
         transaction.setType(TransactionType.TRANSFER);
         transaction.setAmount(amount);
         System.out.println(transaction);
-        accountsMap.get(idTo).addTransactionToList(transaction.getId());
-        accountsMap.get(idFrom).addTransactionToList(transaction.getId());
+  //      accountsMap.get(idTo).addTransactionToList(transaction.getId());
+  //      accountsMap.get(idFrom).addTransactionToList(transaction.getId());
 
 
         //  return transaction;
